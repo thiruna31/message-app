@@ -2,28 +2,33 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageModel {
   final String senderId;
-  final String displayName;
-  final String text;
+  final String username;
+  final String message;
   final DateTime timestamp;
+  final String? messageId;
 
   MessageModel({
     required this.senderId,
-    required this.displayName,
-    required this.text,
+    required this.username,
+    required this.message,
     required this.timestamp,
+    this.messageId,
   });
 
+  // Convert MessageModel → Firestore
   Map<String, dynamic> toMap() {
     return {
       'senderId': senderId,
-      'displayName': displayName,
-      'text': text,
-      'timestamp': timestamp.toIso8601String(),
+      'username': username,
+      'message': message,
+      'timestamp': timestamp,
     };
   }
 
-  factory MessageModel.fromMap(Map<String, dynamic> map) {
+  // Convert Firestore → MessageModel
+  factory MessageModel.fromMap(Map<String, dynamic> map, String id) {
     DateTime ts;
+
     final t = map['timestamp'];
     if (t is Timestamp) {
       ts = t.toDate();
@@ -37,9 +42,10 @@ class MessageModel {
 
     return MessageModel(
       senderId: map['senderId'] ?? '',
-      displayName: map['displayName'] ?? '',
-      text: map['text'] ?? '',
+      username: map['username'] ?? '',
+      message: map['message'] ?? '',
       timestamp: ts,
+      messageId: id,
     );
   }
 }
