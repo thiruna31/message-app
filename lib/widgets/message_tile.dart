@@ -29,7 +29,7 @@ class MessageTile extends StatelessWidget {
           crossAxisAlignment:
               isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            // Username
+            
             Text(
               username,
               style: TextStyle(
@@ -41,7 +41,7 @@ class MessageTile extends StatelessWidget {
 
             const SizedBox(height: 4),
 
-            // Message text
+            
             Text(
               text,
               style: TextStyle(
@@ -52,9 +52,9 @@ class MessageTile extends StatelessWidget {
 
             const SizedBox(height: 4),
 
-            // Timestamp
+           
             Text(
-              timestamp.toString().substring(0, 16), // yyyy-MM-dd HH:mm
+              timestamp.toString().substring(0, 16), 
               style: TextStyle(
                 fontSize: 10,
                 color: isMe ? Colors.white70 : Colors.black54,
